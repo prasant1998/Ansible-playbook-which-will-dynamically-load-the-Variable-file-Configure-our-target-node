@@ -1,0 +1,29 @@
+- hosts: haproxy  
+  vars:
+  - x: "{{ansible_facts['distribution']}}-{{ansible_facts['distribution_major_version']}}.html"
+  
+  vars_files:
+  - "{{ansible_facts['distribution']}}-{{ansible_facts['distribution_major_version']}}.yml"
+
+ 
+  tasks: 
+   
+  - name: "Installing a package"
+    package: 
+         name: "{{ package_name }}"
+         state: present
+ 
+  - name: "Creating a web page in document root"
+    template: 
+         dest: "{{ document_root }}" 
+         src: "/root/ansible_wp/task14/webpage/{{x}}"
+
+  
+  - name: "Starting the service"
+    service: 
+         name: "{{ service_name }}"
+         state: restarted 
+
+  - debug:
+       var: package_name
+

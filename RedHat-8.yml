@@ -1,0 +1,11 @@
+package_name: httpd
+document_root: /var/www/html/index.html
+service_name: httpd
+
+
+
+
+
+
+
+
